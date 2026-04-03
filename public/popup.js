@@ -3,7 +3,6 @@ console.log('popup.js loaded');
 
 // Storage key
 const STORAGE_KEY = 'ksbcl_indent_data';
-console.log('Initializing popup...');
 
 // Wait for DOM to be ready before accessing elements
 function initializePopup() {
@@ -124,5 +123,3 @@ function getIndentData(callback) {
         }
     });
 }
-
-

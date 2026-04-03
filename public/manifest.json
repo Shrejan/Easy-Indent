@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "posathe dala unda",
+  "name": "Easy Indent",
   "version": "1.0.0",
-  "description": "A browser extension to ksbcl indent NEWWNFUTURE",
+  "description": "make indenting easier for retailers",
   "permissions": ["storage", "scripting", "activeTab", "tabs"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [

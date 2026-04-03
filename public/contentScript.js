@@ -60,11 +60,11 @@ function findClickableForDropdown(dropdownSelector) {
   return container;
 }
 
-async function autoSelect(dropdownSelector, optionText, maxAttempts = 12, intervalMs = 1000) {
+async function autoSelect(dropdownSelector, optionText, quantity = '', maxAttempts = 12, intervalMs = 1000) {
   let attempt = 0;
   while (attempt < maxAttempts) {
     attempt++;
-    log(`Attempt ${attempt}/${maxAttempts}`);
+    log(`Attempt ${attempt}/${maxAttempts}: selecting product="${optionText}" quantity="${quantity}"`);
 
     const clickable = findClickableForDropdown(dropdownSelector);
     if (clickable) {
@@ -97,7 +97,7 @@ async function autoSelect(dropdownSelector, optionText, maxAttempts = 12, interv
   return false;
 }
 
-async function setQuantityAndSubmit() {
+async function setQuantityAndSubmit(quantity = "22") {
   try {
     // wait for quantity field to appear
     const quantityInput = await waitFor("#indentCbsId0", 10000);
@@ -107,7 +107,7 @@ async function setQuantityAndSubmit() {
         quantityInput.readOnly = false;
       }
 
-      quantityInput.value = "22";
+      quantityInput.value = quantity;
       quantityInput.dispatchEvent(new Event("input", { bubbles: true }));
       quantityInput.dispatchEvent(new Event("change", { bubbles: true }));
 
@@ -127,7 +127,7 @@ async function setQuantityAndSubmit() {
         }
       }
 
-      log("🧮 Quantity set to 22");
+      log("🧮 Quantity set to " + quantity);
 
       // Optional delay before submitting
       await new Promise(r => setTimeout(r, 500));
@@ -159,11 +159,22 @@ async function setQuantityAndSubmit() {
 
 function getSavedIndentSettings() {
   return new Promise((resolve) => {
-    chrome.storage.local.get(['product', 'quantity'], (items) => {
-      resolve({
-        product: items.product || 'DK Double Kick Fine Whisky-Aseptic Brick Pack 180MLx48ABP(0022)',
-        quantity: items.quantity || '22'
-      });
+    chrome.storage.local.get(['ksbcl_indent_data'], (result) => {
+      const data = result.ksbcl_indent_data;
+      if (data) {
+        log('📦 Loaded settings from chrome.storage.local:', data);
+        resolve({
+          product: data.product || 'DK Double Kick Fine Whisky-Aseptic Brick Pack 180MLx48ABP(0022)',
+          quantity: data.quantity || '22'
+        });
+      } else {
+        const defaults = {
+          product: 'DK Double Kick Fine Whisky-Aseptic Brick Pack 180MLx48ABP(0022)',
+          quantity: '22'
+        };
+        log('🔧 Using default settings:', defaults);
+        resolve(defaults);
+      }
     });
   });
 }
@@ -172,7 +183,7 @@ async function startAutomation() {
   const { product, quantity } = await getSavedIndentSettings();
   const dropdownSelector = '#select2-iteamNameId0-container';
 
-  autoSelect(dropdownSelector, product, 30, 800)
+  autoSelect(dropdownSelector, product, quantity, 30, 800)
     .then(ok => {
       if (ok) {
         log('✅ Auto selection succeeded');

@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSBCL Indent Popup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 350px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        body {
+            padding: 15px;
+            min-height: auto;
+        }
+        
+        .popup-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            box-sizing: border-box;
+            cursor: pointer;
+            background-color: white;
+            color: #333;
+        }
+        
+        select:hover {
+            border-color: #999;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:active {
+            background-color: #3d8b40;
+        }
+        
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+            font-size: 13px;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-container">
+        <h2>KSBCL Indent</h2>
+        
+        <div class="info-box">
+            ℹ️ Select product and quantity, then save.
+        </div>
+        
+        <div class="form-group">
+            <label for="product-select">Product:</label>
+            <select id="product-select">
+                <option value="">-- Choose Product --</option>
+                <option value="DK Double Kick Fine Whisky-Aseptic Brick Pack 180MLx48ABP(0022)">DK Double Kick - 180ML</option>
+                <option value="DK Double Kick Fine Whisky-Aseptic Brick Pack 90MLx96ABP(0022)">DK Double Kick - 90ML</option>
+                <option value="Mysore Lancer Deluxe Quality Whisky-Aseptic Brick Pack 90MLx96Btls(0021)">Mysore Lancer - 90ML</option>
+                <option value="Haywards 5000 Beer 650ML Bottle(0056)">❌Haywards 5000 - 650ML (0056)</option>
+                <option value="McDowell's Whisky 180ML Bottle(0078)">❌McDowell's Whisky - 180ML (0078)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="quantity-select">Quantity:</label>
+            <select id="quantity-select">
+                <option value="">-- Choose Qty --</option>
+                <option value="10">20</option>
+                <option value="20">22</option>
+                <option value="22">25</option>
+                <option value="30">28</option>
+                <option value="50">40</option>
+                <option value="100">50</option>
+            </select>
+        </div>
+        
+        <button id="save-btn">💾 Save</button>
+        <div id="success-msg" class="success-message">✓ Saved successfully!</div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
+
 
