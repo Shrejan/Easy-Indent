@@ -1,69 +1,225 @@
-# React + TypeScript + Vite
+# 🚀 KSBCL Auto Indent Chrome Extension
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Chrome Extension built to help retailers automate the **KSBCL indent process**, reducing waiting time and ensuring **faster submission with lower queue numbers**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Overview
 
-## Expanding the ESLint configuration
+This extension automates the indent workflow on the KSBCL portal by:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* Allowing users to pre-select products and quantities
+* Monitoring the portal opening time
+* Automatically filling and submitting the indent form instantly
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+⚡ Result: **Lower latency → Better indent priority**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ✨ Features
+
+* ⚡ Instant auto submission when portal opens
+* 🛒 Select product & quantity via popup
+* 💾 Saves data using browser local storage
+* ⏳ Waits and triggers automatically (~10 minutes before opening)
+* 🤖 Auto form fill + submission
+* 🔔 Handles confirmation alerts (manual confirmation required)
+
+---
+
+## 📁 Project Structure
+
+```bash
+CHRO_EX_PRAC/
+│
+├── dist/                # ✅ Build output (USE THIS FOLDER IN CHROME)
+├── src/                 # Source code (development)
+├── public/              # Static files (used by Vite)
+├── package.json         # Project config
+├── vite.config.ts       # Vite configuration
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚠️ Important Note
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+This project uses **Vite**, so you **CANNOT directly load the repository into Chrome**.
+
+👉 You MUST build the project first to generate the `dist/` folder.
+
+---
+
+## ⬇️ How to Download the Repository
+
+### Option 1: Clone via Git
+
+```bash
+git clone https://github.com/Shrejan/Easy-Indent.git
+cd CHRO_EX_PRAC
 ```
+
+### Option 2: Download ZIP
+
+1. Click **Code → Download ZIP**
+2. Extract the project folder
+
+---
+
+## 🛠️ Build Instructions (Required)
+
+Before using the extension:
+
+```bash
+npm install
+npm run build
+```
+
+👉 This will generate the `dist/` folder.
+
+---
+
+## 🌐 How to Load Extension in Chrome
+
+1. Open Chrome and go to:
+
+   ```
+   chrome://extensions/
+   ```
+
+2. Enable **Developer Mode** (top right)
+
+3. Click **Load unpacked**
+
+4. Select the **`dist/` folder**
+
+✅ Extension is now installed
+
+---
+
+## 🧑‍💻 How to Use the Extension
+
+### Step 1: Open KSBCL Indent Page
+
+* Navigate to the KSBCL indent portal in your browser
+
+---
+
+### Step 2: Configure Product & Quantity
+
+1. Click the extension icon
+2. Select:
+
+   * Product
+   * Quantity
+3. Save your selection
+
+💾 This data is stored locally in the browser
+
+---
+
+### Step 3: Wait for Portal Opening
+
+* Keep the indent page open
+* The system will monitor availability
+
+⏳  when the portal becomes **Manually active refresh the page frequently**
+
+---
+
+### Step 4: Automatic Submission
+
+Once the portal opens:
+
+* ✅ Product is automatically selected
+* ✅ Quantity is filled
+* ✅ Form is submitted instantly with minimal delay
+
+---
+
+### Step 5: Handle Alerts
+
+After submission:
+
+* ⚠️ Two alert popups will appear
+* 👉 Manually confirm both alerts
+
+✅ Your indent will be successfully submitted
+
+---
+
+## ⚠️ Usage Guidelines
+
+* Keep the indent page **open and active**
+* Ensure **stable internet connection**
+* Do not refresh or close the tab
+* Configure product details before waiting
+
+---
+
+## 🧠 How It Works
+
+* Uses **content scripts** to interact with the webpage
+* Uses **chrome.storage** to store user input
+* Monitors timing/DOM changes
+* Executes actions instantly when conditions are met
+
+---
+
+## 🐞 Troubleshooting
+
+| Issue                     | Solution                         |
+| ------------------------- | -------------------------------- |
+| Extension not working     | Reload in `chrome://extensions/` |
+| No logs visible           | Inspect popup or service worker  |
+| Data not saving           | Check popup script connection    |
+| Auto-submit not triggered | Ensure correct page is open      |
+
+---
+
+## 🔄 Updating the Extension
+
+After making changes:
+
+```bash
+npm run build
+```
+
+Then:
+
+* Go to `chrome://extensions/`
+* Click **Reload**
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome:
+
+* Improve performance
+* Enhance UI
+* Add new automation features
+
+---
+
+## 📜 Disclaimer
+
+This extension is intended to assist retailers by automating repetitive tasks.
+Users should ensure compliance with KSBCL platform rules and policies.
+
+---
+
+## 🚀 Future Improvements
+
+* Full alert automation
+* Better timing prediction
+* Multi-product selection
+* Backend sync support
+
+---
+
+## 🎯 Final Words
+
+This extension gives you a **competitive advantage** by reducing manual delay and ensuring **fastest possible indent submission**.
+
+🔥 *Speed = Priority. Automate Smartly.*
